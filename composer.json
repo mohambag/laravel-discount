@@ -1,0 +1,19 @@
+{
+    "name": "mbagri/discount",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mohammad Bagri",
+            "email": "m.bagri90@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Mbagri\\Discount\\": "src/"
+        }
+    },
+    "require": {
+        "illuminate/support": ">=v8.0.0",
+        "laravelcollective/html": ">=v6.3.0"
+    }
+}
