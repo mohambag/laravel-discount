@@ -22,7 +22,7 @@
                     <h5 class="col-md-8">{{ __('text.discount') }}</h5>
 
                         <a class="btn btn-success"
-                           href="{{route('dashboard.discount.create')}}">{{__('text.add')}}</a>
+                           href="{{route('discount.create')}}">{{__('text.add')}}</a>
 
 
                 </div>
@@ -45,20 +45,20 @@
                         </tr>
                         </thead>
                         <form id="deleteAllForm" method="post" enctype="multipart/form-data"
-                              action="{{route('dashboard.galleries.destroyAll')}}">
+                              action="{{route('galleries.destroyAll')}}">
                             @csrf
                             <tbody>
                             @foreach($discount as $ga)
                                 @switch($ga->status)
                                     @case(1)
                                     @php
-                                        $url=route('dashboard.discount.updatestatus',$ga->id);
+                                        $url=route('discount.updatestatus',$ga->id);
                                         $status='<a href="'.$url.'" class="badge badge-success btn-success btn">فعال</a>';
                                     @endphp
                                     @break
                                     @case(0)
                                     @php
-                                        $url=route('dashboard.discount.updatestatus',$ga->id);
+                                        $url=route('discount.updatestatus',$ga->id);
                                         $status='<a href="'.$url.'" class="badge badge-danger btn-warning btn">غیر فعال</a>';
                                     @endphp
                                     @break
@@ -77,8 +77,8 @@
                                     </td>
 
                                     <td>
-                                            @component('component.btn',['url'=>route('dashboard.discount.edit',$ga->id),'class'=>'info','icon'=>'fa fa-edit','text'=>__('text.edit')])@endcomponent
-                                            @component('component.btn',['url'=>route("dashboard.discount.trash",$ga->id),'class'=>'danger','icon'=>'fa fa-trash','text'=>__('text.trash')])@endcomponent
+                                            @component('component.btn',['url'=>route('discount.edit',$ga->id),'class'=>'info','icon'=>'fa fa-edit','text'=>__('text.edit')])@endcomponent
+                                            @component('component.btn',['url'=>route("discount.trash",$ga->id),'class'=>'danger','icon'=>'fa fa-trash','text'=>__('text.trash')])@endcomponent
                                     </td>
                                 </tr>
                             @endforeach

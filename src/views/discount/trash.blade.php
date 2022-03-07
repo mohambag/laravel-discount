@@ -41,7 +41,7 @@
                                 </tr>
                                 </thead>
                                 <form id="deleteAllForm" method="post" enctype="multipart/form-data"
-                                      action="{{route('dashboard.discount.destroyAll')}}">
+                                      action="{{route('discount.destroyAll')}}">
                                     @csrf
                                     <tbody>
                                     @foreach($discount as $ga)
@@ -66,10 +66,10 @@
 
                                             <td>
                                                 @can('discount-recovery')
-                                                    @component('component.btn',['url'=>route("dashboard.discount.recovery",$ga->id),'class'=>'warning','icon'=>'fa fa-trash-restore','text'=>__('text.recovery')])@endcomponent
+                                                    @component('component.btn',['url'=>route("discount.recovery",$ga->id),'class'=>'warning','icon'=>'fa fa-trash-restore','text'=>__('text.recovery')])@endcomponent
                                                 @endcan
                                                 @can('discount-delete')
-                                                    @component('component.btn',['url'=>route("dashboard.discount.trashdelete",$ga->id),'class'=>'danger','icon'=>'fa fa-trash','text'=>__('text.delete')])@endcomponent
+                                                    @component('component.btn',['url'=>route("discount.trashdelete",$ga->id),'class'=>'danger','icon'=>'fa fa-trash','text'=>__('text.delete')])@endcomponent
                                                 @endcan
                                             </td>
 

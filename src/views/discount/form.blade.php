@@ -37,9 +37,9 @@
                     @include('layouts.errors')
 
                     @if (isset($result['data']) && !empty($result['data']))
-                        {!! Form::model($result['data'],['route'=>['dashboard.discount.update',$result['data']],'method'=>'post']) !!}
+                        {!! Form::model($result['data'],['route'=>['discount.update',$result['data']],'method'=>'post']) !!}
                     @else
-                        {!! Form::open(['route'=>['dashboard.discount.store'],'method'=>'post']) !!}
+                        {!! Form::open(['route'=>['discount.store'],'method'=>'post']) !!}
                     @endif
 
                     <div class="form-group">
@@ -170,7 +170,7 @@
 
                     <div class="form-group">
                         {!! Form::submit('ارسال',['class'=>'btn btn-primary block full-width m-b']) !!}
-                        <a href="{{ route('dashboard.discount') }}" rel="nofollow"
+                        <a href="{{ route('discount') }}" rel="nofollow"
                            class="btn btn-info block full-width m-b">برگشت</a>
                     </div>
                     {!! Form::close(); !!}
