@@ -6,10 +6,11 @@ namespace Mbagri\Discount\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
-use Mbagri\discount\Discount;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mbagri\Discount\Discount;
 
 class DiscountController extends Controller
 {
