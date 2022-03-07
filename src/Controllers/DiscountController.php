@@ -27,7 +27,7 @@ class DiscountController extends Controller
     {
 
         $result = [
-            'User'=>User::get(),
+            'users'=>User::get(),
         ];
 
 //             dd($result['products']);
@@ -100,7 +100,7 @@ class DiscountController extends Controller
         $result = [
 
             'data' => Discount::withoutTrashed()->where('id', '=', $id)->first(),
-            'User'=>User::get(),
+            'users'=>User::get(),
         ];
 
 
