@@ -88,7 +88,7 @@ class DiscountController extends Controller
         $result = [
             'message' => 'تخفیف مورد نظر با موفقیت ایجاد شد',
             'class' => 'success',
-            'User' => User::withoutTrashed()->get(),
+            'users' => User::get(),
         ];
 
         return \redirect()->back()->with('success',$result['message']);
