@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Mbagri\discount;
+namespace Mbagri\Discount;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

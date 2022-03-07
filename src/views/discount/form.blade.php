@@ -12,6 +12,7 @@
     <link href="{{__DIR__.'bootstrap-tagsinput.css'}}" rel="stylesheet">
     <link rel="stylesheet"
           href="{{__DIR__.'jquery.Bootstrap-PersianDateTimePicker.css'}}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <script src="{{__DIR__.'bootstrap.min.js'}}" type="text/javascript"></script>
     <script src="{{__DIR__.'calendar.js'}}" type="text/javascript"></script>
@@ -30,7 +31,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>{{ __('text.discountAdd') }}</h5>
+                    <h5>افزودن کد تخفیف</h5>
                 </div>
                 <div class="ibox-content">
                     @include('layouts.errors')
@@ -42,29 +43,29 @@
                     @endif
 
                     <div class="form-group">
-                        {!! Form::label("name",__('text.name')) !!}
-                        {!! Form::text("name",null,['class'=>'form-control','placeholder'=>__('text.name')]) !!}
+                        {!! Form::label("name",'نام') !!}
+                        {!! Form::text("name",null,['class'=>'form-control','placeholder'=>'نام']) !!}
                         @if ($errors->has('name'))
                             <span class="error text-danger">{{ $errors->first('name') }}</span>
                         @endif
                     </div>
                     <div class="form-group">
-                        {!! Form::label("code",__('text.code')) !!}
-                        {!! Form::text("code",null,['class'=>'form-control','placeholder'=>__('text.code')]) !!}
+                        {!! Form::label("code",'کد') !!}
+                        {!! Form::text("code",null,['class'=>'form-control','placeholder'=>'کد']) !!}
                         @if ($errors->has('code'))
                             <span class="error text-danger">{{ $errors->first('code') }}</span>
                         @endif
                     </div>
                     <div class="form-group">
-                        {!! Form::label("countUse",__('text.countUse')) !!}
-                        {!! Form::number("countUse",null,['class'=>'form-control','min'=>0,'placeholder'=>__('text.countUse')]) !!}
+                        {!! Form::label("countUse",'تعداد دفعات قابل استفاده') !!}
+                        {!! Form::number("countUse",null,['class'=>'form-control','min'=>0,'placeholder'=>'تعداد دفعات قابل استفاده']) !!}
                         @if ($errors->has('countUse'))
                             <span class="error text-danger">{{ $errors->first('countUse') }}</span>
                         @endif
                     </div>
 
                     <div class="col-md-12" style="padding: 0">
-                        {!! Form::label("users",__('text.users')) !!}
+                        {!! Form::label("users",'کاربر') !!}
                         <br>
                         <div id="text1"
                              style="">
@@ -79,16 +80,7 @@
                     </div>
 
                     <div class="form-group">
-                        {!! Form::label("groupUser",__('text.groupUser')) !!}
-                        {!! Form::select("groupUser",$result['usersGroup'],null,['class'=>'form-control chosen-select']) !!}
-                        @if ($errors->has('groupUser'))
-                            <span class="error text-danger">{{ $errors->first('groupUser') }}</span>
-                        @endif
-                    </div>
-
-
-                    <div class="form-group">
-                        {!! Form::label("dataIn",__('text.dataIn')) !!}
+                        {!! Form::label("dataIn",'از تاریخ') !!}
                         {!! Form::text("dataIn",null,['class'=>'form-control','placeholder'=>'از تاریخ','id'=>'fromDate1','data-mddatetimepicker'=>true,'data-trigger'=>'click','data-targetselector'=>'#fromDate1','data-groupid'=>'group1','data-enabletimepicker'=>false,'data-placement'=>'bottom','readonly'=>true]) !!}
                         <div class="input-group-addon" data-mddatetimepicker="true"
                              data-trigger="click"
@@ -116,7 +108,7 @@
 
                     <div class="form-group">
 
-                        {!! Form::label("status",__('text.typeDiscount')) !!}
+                        {!! Form::label("status",'نوع تخفیف') !!}
 
                         <br>
                         <input type="checkbox" id="myCheck" name="typeDiscount" value="1"
@@ -125,8 +117,8 @@
                         <div id="percentt"
                              style="{{ isset($result['data']) ? ($result['data']['typeDiscount']==0?'display:none':'') : 'display:none' }}">
                             <div class="form-group" style="padding: 0 0 0 2px">
-                                {!! Form::label("percentDiscount",__('text.percentDiscount')) !!}
-                                {!! Form::number("percentDiscount",null,['class'=>'form-control','min'=>0,'max'=>100,'placeholder'=>__('text.percentDiscount')]) !!}
+                                {!! Form::label("percentDiscount",'درصد تخفیف') !!}
+                                {!! Form::number("percentDiscount",null,['class'=>'form-control','min'=>0,'max'=>100,'placeholder'=>'درصد تخفیف']) !!}
                                 @if ($errors->has('percentDiscount'))
                                     <span class="error text-danger">{{ $errors->first('percentDiscount') }}</span>
                                 @endif
@@ -136,8 +128,8 @@
                         <div id="priceType"
                              style="{{ isset($result['data']) ? ($result['data']['typeDiscount']==1?'display:none':'') : 'display:block' }}">
                             <div class="form-group">
-                                {!! Form::label("priceDiscount",__('text.priceDiscount')) !!}
-                                {!! Form::number("priceDiscount",null,['class'=>'form-control','min'=>0,'placeholder'=>__('text.priceDiscount')]) !!}
+                                {!! Form::label("priceDiscount",'قیمت تخفیف') !!}
+                                {!! Form::number("priceDiscount",null,['class'=>'form-control','min'=>0,'placeholder'=>'قیمت تخفیف']) !!}
                                 @if ($errors->has('priceDiscount'))
                                     <span class="error text-danger">{{ $errors->first('priceDiscount') }}</span>
                                 @endif
@@ -148,16 +140,16 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-6" style="padding: 0 0 0 2px">
-                            {!! Form::label("minprice",__('text.minprice')) !!}
-                            {!! Form::number("minprice",null,['class'=>'form-control','min'=>0,'placeholder'=>__('text.minprice')]) !!}
+                            {!! Form::label("minprice",'حداقل مبلغ') !!}
+                            {!! Form::number("minprice",null,['class'=>'form-control','min'=>0,'placeholder'=>'حداقل قیمت']) !!}
                             @if ($errors->has('minprice'))
                                 <span class="error text-danger">{{ $errors->first('minprice') }}</span>
                             @endif
                         </div>
 
                         <div class="col-md-6" style="padding: 0 0 0 2px">
-                            {!! Form::label("maxprice",__('text.maxprice')) !!}
-                            {!! Form::number("maxprice",null,['class'=>'form-control','min'=>0,'placeholder'=>__('text.maxprice')]) !!}
+                            {!! Form::label("maxprice",'حداکثر مبلغ') !!}
+                            {!! Form::number("maxprice",null,['class'=>'form-control','min'=>0,'placeholder'=>'حداکثر قیمت']) !!}
                             @if ($errors->has('maxprice'))
                                 <span class="error text-danger">{{ $errors->first('maxprice') }}</span>
                             @endif
@@ -167,7 +159,7 @@
                     <hr>
                     <div class="form-group">
                         <div class="col-md-12">
-                            <lable for="title">{{__('text.status')}}</lable>
+                            <lable for="title">وضعیت</lable>
                             <br>
                             {!! Form::hidden("status",(isset($result['data']->status) && !empty($result['data']->status)?1:0),['class'=>'form-control','id'=>'statusid']) !!}
                             <a id="statusbtn">
@@ -177,9 +169,9 @@
                     </div>
 
                     <div class="form-group">
-                        {!! Form::submit(__('text.send'),['class'=>'btn btn-primary block full-width m-b']) !!}
+                        {!! Form::submit('ارسال',['class'=>'btn btn-primary block full-width m-b']) !!}
                         <a href="{{ route('dashboard.discount') }}" rel="nofollow"
-                           class="btn btn-info block full-width m-b">{{ __('text.back') }}</a>
+                           class="btn btn-info block full-width m-b">برگشت</a>
                     </div>
                     {!! Form::close(); !!}
 

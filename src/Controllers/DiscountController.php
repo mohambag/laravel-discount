@@ -4,6 +4,8 @@ namespace Mbagri\Discount\Controllers;
 
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 use Mbagri\discount\Discount;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,15 +36,35 @@ class DiscountController extends Controller
     public function store(Request $request)
     {
 
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:250',
+            'priceDiscount' => 'numeric|nullable|max:4294967295|min:0',
+            'code' => 'required|max:250|unique:discount',
+            'percentDiscount' => 'max:100|min:0|numeric|nullable',
+            'minprice' => 'numeric|nullable|min:0|lt:maxprice|max:4294967295',
+            'maxprice' => 'numeric|nullable|gt:minprice|max:4294967295',
+            'countUse' => 'numeric|max:4294967295|required',
+        ],[
+            'name.required' => 'وارد کردن نام اجباری می باشد',
+            'code.unique' => 'کد مورد نظر قبلا ثبت شده است',
+            'countUse.required' => 'وارد کردن تعداد دفعات استفاده اجباری می باشد',
+            'code.required' => 'وارد کردن کد اجباری می باشد',
+            'name.max' => 'تعداد کاراکتر باید کمتر از 255 حرف باشد',
+            'minprice.numeric' =>'فرمت ورودی عدد باید باشد',
+            'maxprice.numeric' =>'فرمت ورودی عدد باید باشد',
+            'countUse.numeric' =>'فرمت ورودی عدد باید باشد',
+            'priceDiscount.required' => 'وارد کردن قیمت اجباری می باشد',
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
         $discount = new Discount();
         $discount->user_id = Auth::id();
         $discount->name = $request->name;
         $discount->code = $request->code;
         $discount->priceDiscount = $request->priceDiscount;
-//        $discount->user = $request->user;
-        $discount->groupUser = $request->groupUser;
-        $discount->category = $request->category;
-//        $discount->product = $request->product;
         $discount->minprice = $request->minprice;
         $discount->maxprice = $request->maxprice;
         $discount->countUse = $request->countUse;
@@ -87,13 +109,36 @@ class DiscountController extends Controller
     public function update(Request $request,Discount $discount)
     {
 
+        $validator = Validator::make($request->all(),
+            [
+                'name' => 'required|max:250',
+                'priceDiscount' => 'numeric|nullable|max:4294967295|min:0',
+                'code' => 'required|max:250|unique:discount',
+                'percentDiscount' => 'max:100|min:0|numeric|nullable',
+                'minprice' => 'numeric|nullable|min:0|lt:maxprice|max:4294967295',
+                'maxprice' => 'numeric|nullable|gt:minprice|max:4294967295',
+                'countUse' => 'numeric|max:4294967295|required',
+            ],[
+            'name.required' => 'وارد کردن نام اجباری می باشد',
+            'code.unique' => 'کد مورد نظر قبلا ثبت شده است',
+            'countUse.required' => 'وارد کردن تعداد دفعات استفاده اجباری می باشد',
+            'code.required' => 'وارد کردن کد اجباری می باشد',
+            'name.max' => 'تعداد کاراکتر باید کمتر از 255 حرف باشد',
+            'minprice.numeric' =>'فرمت ورودی عدد باید باشد',
+            'maxprice.numeric' =>'فرمت ورودی عدد باید باشد',
+            'countUse.numeric' =>'فرمت ورودی عدد باید باشد',
+            'priceDiscount.required' => 'وارد کردن قیمت اجباری می باشد',
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
         $discount->update([
             'name' => $request->name,
             'countUse' => $request->countUse,
             'code' => $request->code,
             'priceDiscount' => $request->priceDiscount,
-            'groupUser' => $request->groupUser,
-            'category' => $request->category,
             'dataIn' => $request->dataIn,
             'dataOut' => $request->dataOut,
             'status' => $request->status,
