@@ -33,14 +33,14 @@
                     <table class="table table-striped table-bordered table-hover dataTables-profile">
                         <thead>
                         <tr>
-                            <th>{{__('text.id')}}</th>
-                            <th>{{__('text.name')}}</th>
-                            <th>{{__('text.priceDiscount')}}</th>
-                            <th>{{__('text.percentDiscount')}}</th>
-                            <th>{{__('text.dataIn')}}</th>
-                            <th>{{__('text.dataOut')}}</th>
-                            <th>{{__('text.status')}}</th>
-                            <th>{{__('text.admins')}}</th>
+                            <th>{{__('#')}}</th>
+                            <th>{{__('نام')}}</th>
+                            <th>{{__('قیمت تخفیف')}}</th>
+                            <th>{{__('درصد تخفیف')}}</th>
+                            <th>{{__('تاریخ')}}</th>
+                            <th>{{__('تا تاریخ')}}</th>
+                            <th>{{__('وضعیت')}}</th>
+                            <th>{{__('مدیریت')}}</th>
 
                         </tr>
                         </thead>
