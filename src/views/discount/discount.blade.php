@@ -44,8 +44,7 @@
 
                         </tr>
                         </thead>
-                        <form id="deleteAllForm" method="post" enctype="multipart/form-data"
-                              action="{{route('galleries.destroyAll')}}">
+
                             @csrf
                             <tbody>
                             @foreach($discount as $ga)
@@ -83,7 +82,6 @@
                                 </tr>
                             @endforeach
                             </tbody>
-                        </form>
                     </table>
                 </div>
                 <div class="row" style="margin: auto">
