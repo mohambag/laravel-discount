@@ -19,8 +19,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>  <script src="{{__DIR__.'calendar.js'}}" type="text/javascript"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js" integrity="sha512-rMGGF4wg1R73ehtnxXBt5mbUfN9JUJwbk21KMlnLZDJh7BkPmeovBuddZCENJddHYYMkCh9hPFnPmS9sspki8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <title>ایجاد تخفیف</title>
+   <title>ایجاد تخفیف</title>
 
 
     <style>
@@ -181,8 +180,8 @@
                         <br>
                         <div id="text1"
                              style="">
-                            <select style="width: 100%;" class="select2-canal form-control" aria-hidden="true"
-                                    name="users[]" id="user_id" multiple="multiple">
+                            <select style="width: 100%;" class=" form-control" aria-hidden="true"
+                                    name="users[]" id="user_id" >
                                 @foreach($result['users'] as $user)
                                     <option
                                         value="{{ $user->id }}" {{ isset($result['data']) ? (in_array($user->id, $result['data']->users->pluck('id')->toArray())?'selected' : '') : '' }}>{{$user->name}}</option>
