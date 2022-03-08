@@ -153,14 +153,14 @@ class DiscountController extends Controller
         $discount->User()->sync($request->User);
 
 
-        return \redirect(route('dashboard.discount'))->with('success','تخفیف مورد نظر با موفقیت بروز رسانی شد');
+        return \redirect(route('discount'))->with('success','تخفیف مورد نظر با موفقیت بروز رسانی شد');
     }
 
     public function destroy(Discount $discount)
     {
         $discount->delete();
         $msg = 'تخفیف موردنظر با موفقیت حذف شد';
-        return redirect(route('dashboard.discount'))->with('success', $msg);
+        return redirect(route('discount'))->with('success', $msg);
     }
 
     public function destroyAll(Request $request)
@@ -185,7 +185,7 @@ class DiscountController extends Controller
 
         $item->save();
         $msg = 'تغییرات با موفقیت انجام شد';
-        return redirect(route('dashboard.discount'))->with('success', $msg);
+        return redirect(route('discount'))->with('success', $msg);
     }
 
     //    ***********************************************************

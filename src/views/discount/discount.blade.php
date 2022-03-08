@@ -1,5 +1,5 @@
 
-    <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,84 +13,84 @@
 <body>
 <div id="wrapper">
     <div id="page-wrapper" class="gray-bg dashbard-1">
-<div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
-        <div class="col-lg-12">
-            @include('layouts.errors')
-            <div class="ibox float-e-margins" style="margin-bottom: 0 !important;">
-                <div class="ibox-title">
-                    <h5 class="col-md-8">{{ __('text.discount') }}</h5>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    @include('layouts.errors')
+                    <div class="ibox float-e-margins" style="margin-bottom: 0 !important;">
+                        <div class="ibox-title">
+                            <h5 class="col-md-8">{{ 'تخفیفات' }}</h5>
 
-                        <a class="btn btn-success"
-                           href="{{route('discount.create')}}">{{__('text.add')}}</a>
+                            <a class="btn btn-success"
+                               href="{{route('discount.create')}}">{{'افزودن'}}</a>
 
 
-                </div>
-            </div>
+                        </div>
+                    </div>
 
-            <div class="ibox-content">
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover dataTables-profile">
-                        <thead>
-                        <tr>
-                            <th>{{__('#')}}</th>
-                            <th>{{__('نام')}}</th>
-                            <th>{{__('قیمت تخفیف')}}</th>
-                            <th>{{__('درصد تخفیف')}}</th>
-                            <th>{{__('تاریخ')}}</th>
-                            <th>{{__('تا تاریخ')}}</th>
-                            <th>{{__('وضعیت')}}</th>
-                            <th>{{__('مدیریت')}}</th>
-
-                        </tr>
-                        </thead>
-
-                            @csrf
-                            <tbody>
-                            @foreach($discount as $ga)
-                                @switch($ga->status)
-                                    @case(1)
-                                    @php
-                                        $url=route('discount.updatestatus',$ga->id);
-                                        $status='<a href="'.$url.'" class="badge badge-success btn-success btn">فعال</a>';
-                                    @endphp
-                                    @break
-                                    @case(0)
-                                    @php
-                                        $url=route('discount.updatestatus',$ga->id);
-                                        $status='<a href="'.$url.'" class="badge badge-danger btn-warning btn">غیر فعال</a>';
-                                    @endphp
-                                    @break
-                                    @default
-                                @endswitch
-
+                    <div class="ibox-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover dataTables-profile">
+                                <thead>
                                 <tr>
-                                    <td>{{$ga->id}}</td>
-                                    <td>{{$ga->name}}</td>
-                                    <td>{{$ga->priceDiscount ?? __('text.doesnt')}}</td>
-                                    <td>{{$ga->percentDiscount ?? __('text.doesnt')}}</td>
-                                    <td>{{$ga->dataIn}}</td>
-                                    <td>{{$ga->dataOut}}</td>
-                                    <td>
-                                            {!! $status !!}
-                                    </td>
+                                    <th>{{__('#')}}</th>
+                                    <th>{{__('نام')}}</th>
+                                    <th>{{__('قیمت تخفیف')}}</th>
+                                    <th>{{__('درصد تخفیف')}}</th>
+                                    <th>{{__('تاریخ')}}</th>
+                                    <th>{{__('تا تاریخ')}}</th>
+                                    <th>{{__('وضعیت')}}</th>
+                                    <th>{{__('مدیریت')}}</th>
 
-                                    <td>
-                                            @component('component.btn',['url'=>route('discount.edit',$ga->id),'class'=>'info','icon'=>'fa fa-edit','text'=>__('text.edit')])@endcomponent
-                                            @component('component.btn',['url'=>route("discount.trash",$ga->id),'class'=>'danger','icon'=>'fa fa-trash','text'=>__('text.trash')])@endcomponent
-                                    </td>
                                 </tr>
-                            @endforeach
-                            </tbody>
-                    </table>
-                </div>
-                <div class="row" style="margin: auto">
-                    {{$discount->links()}}
+                                </thead>
+
+                                @csrf
+                                <tbody>
+                                @foreach($discount as $ga)
+                                    @switch($ga->status)
+                                        @case(1)
+                                        @php
+                                            $url=route('discount.updatestatus',$ga->id);
+                                            $status='<a href="'.$url.'" class="badge badge-success btn-success btn">فعال</a>';
+                                        @endphp
+                                        @break
+                                        @case(0)
+                                        @php
+                                            $url=route('discount.updatestatus',$ga->id);
+                                            $status='<a href="'.$url.'" class="badge badge-danger btn-warning btn">غیر فعال</a>';
+                                        @endphp
+                                        @break
+                                        @default
+                                    @endswitch
+
+                                    <tr>
+                                        <td>{{$ga->id}}</td>
+                                        <td>{{$ga->name}}</td>
+                                        <td>{{$ga->priceDiscount ?? 'ندارد'}}</td>
+                                        <td>{{$ga->percentDiscount ?? 'ندارد'}}</td>
+                                        <td>{{$ga->dataIn}}</td>
+                                        <td>{{$ga->dataOut}}</td>
+                                        <td>
+                                            {!! $status !!}
+                                        </td>
+
+                                        <td>
+                                            <a href="{{route('discount.edit',$ga->id)}}" class="btn info">ویرایش</a>
+                                            <a href="{{route('discount.trash',$ga->id)}}" class="btn danger">حذف</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row" style="margin: auto">
+                            {{$discount->links()}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
     </div>
 </div>
 </body>
