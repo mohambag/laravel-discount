@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Mbagri\Discount\Discount1;
+use Mbagri\Discount\Discount;
 
 class DiscountController extends Controller
 {
@@ -18,7 +18,7 @@ class DiscountController extends Controller
 
     public function index()
     {
-        $queryDiscount = Discount1::withoutTrashed();
+        $queryDiscount = Discount::withoutTrashed();
         $discount = $queryDiscount->orderBy('id', 'DESC')->paginate(30);
       return view('discount.discount', compact('discount'));
     }
@@ -61,7 +61,7 @@ class DiscountController extends Controller
             return Redirect::back()->withErrors($validator)->withInput();
         }
 
-        $discount = new Discount1();
+        $discount = new Discount();
         $discount->user_id = Auth::id();
         $discount->name = $request->name;
         $discount->code = $request->code;
@@ -99,7 +99,7 @@ class DiscountController extends Controller
 
         $result = [
 
-            'data' => Discount1::withoutTrashed()->where('id', '=', $id)->first(),
+            'data' => Discount::withoutTrashed()->where('id', '=', $id)->first(),
             'users'=>User::get(),
         ];
 
@@ -107,14 +107,14 @@ class DiscountController extends Controller
         return view('discount.form', compact('result'));
     }
 
-    public function update(Request $request, Discount1 $discount)
+    public function update(Request $request, Discount $discount)
     {
 
         $validator = Validator::make($request->all(),
             [
                 'name' => 'required|max:250',
                 'priceDiscount' => 'numeric|nullable|max:4294967295|min:0',
-                'code' => 'required|max:250|unique:discount',
+                'code' => 'required|max:250',
                 'percentDiscount' => 'max:100|min:0|numeric|nullable',
                 'minprice' => 'numeric|nullable|min:0|lt:maxprice|max:4294967295',
                 'maxprice' => 'numeric|nullable|gt:minprice|max:4294967295',
@@ -156,7 +156,7 @@ class DiscountController extends Controller
         return \redirect(route('discount'))->with('success','تخفیف مورد نظر با موفقیت بروز رسانی شد');
     }
 
-    public function destroy(Discount1 $discount)
+    public function destroy(Discount $discount)
     {
         $discount->delete();
         $msg = 'تخفیف موردنظر با موفقیت حذف شد';
@@ -167,7 +167,7 @@ class DiscountController extends Controller
     {
         $ids = $request->ids;
         foreach ($ids as $id) {
-            $item = Discount1::onlyTrashed()->where('id', '=', $id);
+            $item = Discount::onlyTrashed()->where('id', '=', $id);
             $item->forceDelete();
         }
         return redirect()->back()->with('success', "آیتمهای مورد نظر بدرستی حذف گردید");
@@ -175,7 +175,7 @@ class DiscountController extends Controller
 
     public function updatestatus($id)
     {
-        $item = Discount1::where('id', '=', $id)->first();
+        $item = Discount::where('id', '=', $id)->first();
 
         if ($item->status == 0) {
             $item->status = 1;
@@ -192,15 +192,15 @@ class DiscountController extends Controller
 
     public function delete($id)
     {
-        $item = Discount1::withoutTrashed()->where('id', '=', $id);
+        $item = Discount::withoutTrashed()->where('id', '=', $id);
         if ($item->get()->isNotEmpty()) {
             $item->delete();
-            $discount = Discount1::withoutTrashed()->paginate(20);
+            $discount = Discount::withoutTrashed()->paginate(20);
             $msg = 'آیتم مورد نظر بدرستی حذف گردید';
             return view('discount.discount', compact('discount'))->with('success', $msg);
         } else {
             $msg = 'خطا!';
-            $discount = Discount1::withoutTrashed()->paginate(20);
+            $discount = Discount::withoutTrashed()->paginate(20);
             return view('discount.discount', compact('discount'))->with('warning', $msg);
         }
 
@@ -209,14 +209,14 @@ class DiscountController extends Controller
 
     public function trashDelete($id)
     {
-        $item = Discount1::onlyTrashed()->where('id', '=', $id);
+        $item = Discount::onlyTrashed()->where('id', '=', $id);
         if ($item->get()->isNotEmpty()) {
             $item->forceDelete();
-            $discount = Discount1::onlyTrashed()->paginate(20);
+            $discount = Discount::onlyTrashed()->paginate(20);
             $msg = 'آیتمهای مورد نظر بدرستی حذف گردید';
             return view('discount.trash', compact('discount'))->with('success', $msg);
         } else {
-            $discount = Discount1::onlyTrashed()->paginate(20);
+            $discount = Discount::onlyTrashed()->paginate(20);
             $msg = 'خطا!';
             return view('discount.trash', compact('discount'))->with('warning', $msg);
         }
@@ -225,18 +225,18 @@ class DiscountController extends Controller
 
     public function recovery($id)
     {
-        $item = Discount1::onlyTrashed()->where('id', '=', $id);
+        $item = Discount::onlyTrashed()->where('id', '=', $id);
         if ($item->get()->isNotEmpty()) {
             $item->update([
                 'deleted_at' => null
             ]);
 
-            $discount = Discount1::onlyTrashed()->paginate(20);
+            $discount = Discount::onlyTrashed()->paginate(20);
             $msg = 'آیتمهای مورد نظر بدرستی بازیابی گردید';
             return view('discount.trash', compact('discount'))->with('success', $msg);
 
         } else {
-            $discount = Discount1::onlyTrashed()->paginate(20);
+            $discount = Discount::onlyTrashed()->paginate(20);
             $msg = 'خطا!';
             return view('discount.trash', compact('discount'))->with('warning', $msg);
         }
@@ -245,7 +245,7 @@ class DiscountController extends Controller
 
     public function trashview()
     {
-        $discount = Discount1::onlyTrashed()->paginate(20);
+        $discount = Discount::onlyTrashed()->paginate(20);
         return view('discount.trash', compact('discount'));
     }
 

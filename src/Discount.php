@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Mbagri\Discount;
 
 use App\Models\User;
@@ -9,7 +10,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Discount extends Model
 {
-
     use HasFactory, SoftDeletes;
 
     protected $table = 'discount';
@@ -32,3 +32,4 @@ class Discount extends Model
     }
 
 }
+
