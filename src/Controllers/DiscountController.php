@@ -82,7 +82,7 @@ class DiscountController extends Controller
         $discount->dataOut = $request->dataOut;
         $discount->status = $request->status;
         $discount->save();
-        $discount->User()->attach($request->User);
+        $discount->users()->attach($request->User);
 
 
         $result = [
@@ -150,7 +150,7 @@ class DiscountController extends Controller
 
         ]);
 
-        $discount->User()->sync($request->User);
+        $discount->users()->sync($request->User);
 
 
         return \redirect(route('discount'))->with('success','تخفیف مورد نظر با موفقیت بروز رسانی شد');
